@@ -22,14 +22,14 @@ World = function(){
 
 	//Composer variables
 	this.renderTargetParameters;
-    this.renderTarget;
-    this.effectBloom;
-    this.composer;
+	this.renderTarget;
+	this.effectBloom;
+	this.composer;
 
-    this.isFullscreen = false;
+	this.isFullscreen = false;
 
-    //Leap variables
-    this.previousFrame;
+	//Leap variables
+	this.previousFrame;
 };
 
 World.prototype = {
