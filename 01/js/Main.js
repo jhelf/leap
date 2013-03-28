@@ -158,6 +158,12 @@ World.prototype = {
 
 		this.scene.add(cube);
 		this.particles.push({elem:cube,opacity:1,speedX:(velocity[0].toFixed(1)*0.01)+((Math.random()-0.5)*4),speedY:(velocity[1].toFixed(1)*0.01)+((Math.random()-0.5)*4),speedZ:(velocity[2].toFixed(1)*0.01)+((Math.random()-0.5)*4),rotX:Math.random()*0.02,rotY:Math.random()*0.02});
+		
+		//Remove last cube if there is more than 200 cubes to help performance
+		if(this.particles.length > 200){
+			this.scene.remove(this.particles[0].elem);
+			this.particles.shift();
+		}
 	},
 
 	createObjects:function(){
