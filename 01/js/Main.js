@@ -70,7 +70,6 @@ World.prototype = {
         // set up a request for a render
         requestAnimationFrame($.proxy(this.render,this));
 
-        document.addEventListener( 'mousemove', $.proxy(this.onDocumentMouseMove,this), false );
         window.addEventListener( 'resize', $.proxy(this.onWindowResized,this), false );
 
         document.onkeypress = $.proxy(this.onKeyPressed,this);
@@ -188,27 +187,8 @@ World.prototype = {
 		this.scene.add(this.light);
 	},
 
-	onKeyPressed:function(event){
-		var that = this;
-
-		console.log(event.keyCode);
-	},
-
-	onDocumentMouseMove:function ( event ) {
-
-		this.mouseX = ( event.clientX - window.innerWidth/2 ) / 2;
-		this.mouseY = ( event.clientY - window.innerHeight/2 ) / 2;
-
-	},
-
 	render:function(){
 		var that = this;
-
-		//Update
-		//this.camera.position.x += ( this.mouseX - this.camera.position.x ) * .05;
-		//this.camera.position.y += ( - this.mouseY - this.camera.position.y ) * .05;
-		//this.camera.lookAt( this.scene.position );
-
 
 		for(var i=0;i<this.particles.length;i++){
 			var elem = that.particles[i].elem;
