@@ -13,6 +13,10 @@ These are experiments, so I will not bother too much about code cleaning and all
 
 The first experiment uses the leap data to show 3d cubes on the screen.
 
+// 02 : Liquid
+
+This experiment uses the leap to create ripples on a liquid surface.
+
 
 
 Some experiments uses the great Three.js Library to render the 3d.
