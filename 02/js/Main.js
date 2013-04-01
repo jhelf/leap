@@ -44,7 +44,6 @@ World.prototype = {
         // set up a request for a render
         requestAnimationFrame($.proxy(this.render,this));
 
-        document.addEventListener( 'mousemove', $.proxy(this.onDocumentMouseMove,this), false );
         window.addEventListener( 'resize', $.proxy(this.onWindowResized,this), false );
 
         this.initLeap();
