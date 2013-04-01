@@ -22,14 +22,15 @@ World = function(){
 
 	//Composer variables
 	this.renderTargetParameters;
-	this.renderTarget;
-	this.effectBloom;
-	this.composer;
+    this.renderTarget;
+    this.effectBloom;
+    this.composer;
 
-	this.isFullscreen = false;
+    this.isFullscreen = false;
 
-	//Leap variables
-	this.previousFrame;
+    //Leap variables
+    this.leapTimeOut;
+    this.isLeapConnected = false;
 };
 
 World.prototype = {
@@ -97,21 +98,19 @@ World.prototype = {
 	initLeap:function(){
 		var that = this;
 
-		Leap.loop({},function(frame){
-			if(that.previousFrame){
-
+		this.leapTimeOut = setTimeout(function(){
+			if(!that.isLeapConnected){
+				//Leap Device is not connected, show Error message
+				$('#noleap').css('opacity','1');
 			}
+		},2000);
 
-			//Detect hands
-			if (frame.hands.length > 0) {
-				for (var i = 0; i < frame.hands.length; i++) {
-      				var hand = frame.hands[i];
+		Leap.loop({},function(frame){
 
-      				// IDs of pointables (fingers and tools) associated with this hand
-      				if (hand.pointables.length > 0) {
-
-      				}
-      			}
+			if(!that.isLeapConnected){
+				clearTimeout(that.leapTimeOut);
+				that.isLeapConnected = true;
+				$('#noleap').css('opacity','0');
 			}
 
 			//Detect pointables
@@ -126,9 +125,6 @@ World.prototype = {
 			    	}
 			    }
 			}
-
-			// Store frame for motion functions
-	  		that.previousFrame = frame;
 		});
 			
 	},
@@ -167,18 +163,6 @@ World.prototype = {
 
 	createObjects:function(){
 		var that = this;
-
-		//Init material
-		var path = "./skybox/";
-		var format = '.jpg';
-		var urls = [
-			path + 'px' + format, path + 'nx' + format,
-			path + 'py' + format, path + 'ny' + format,
-			path + 'pz' + format, path + 'nz' + format
-		];
-
-		this.env = THREE.ImageUtils.loadTextureCube( urls );
-		this.env.format = THREE.RGBFormat;
 
 		this.light = new THREE.PointLight(0xFFFFFF, 1);
 		this.light.position.y = 0;

@@ -17,7 +17,8 @@ World = function(){
 	this.surface2;
 
 	//Leap variables
-    this.previousFrame;
+    this.leapTimeOut;
+    this.isLeapConnected = false;
 };
 
 World.prototype = {
@@ -107,21 +108,19 @@ World.prototype = {
 	initLeap:function(){
 		var that = this;
 
-		Leap.loop({},function(frame){
-			if(that.previousFrame){
-
+		this.leapTimeOut = setTimeout(function(){
+			if(!that.isLeapConnected){
+				//Leap Device is not connected, show Error message
+				$('#noleap').css('opacity','1');
 			}
+		},2000);
 
-			//Detect hands
-			if (frame.hands.length > 0) {
-				for (var i = 0; i < frame.hands.length; i++) {
-      				var hand = frame.hands[i];
+		Leap.loop({},function(frame){
 
-      				// IDs of pointables (fingers and tools) associated with this hand
-      				if (hand.pointables.length > 0) {
-
-      				}
-      			}
+			if(!that.isLeapConnected){
+				clearTimeout(that.leapTimeOut);
+				that.isLeapConnected = true;
+				$('#noleap').css('opacity','0');
 			}
 
 			//Detect pointables
@@ -136,9 +135,6 @@ World.prototype = {
 			    	}
 			    }
 			}
-
-			// Store frame for motion functions
-	  		that.previousFrame = frame;
 		});
 			
 	},

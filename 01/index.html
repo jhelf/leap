@@ -29,6 +29,31 @@
 				right:10px;
 				cursor:pointer;
 			}
+
+			#noleap{
+				-webkit-transition:opacity 500ms;
+				-moz-transition:opacity 500ms;
+				-o-transition:opacity 500ms;
+				-ms-transition:opacity 500ms;
+				transition:opacity 500ms;
+				opacity:0;
+				width:440px;
+				height:120px;
+				position:absolute;
+				top:50%;
+				left:50%;
+				margin-top:-75px;
+				margin-left:-220px;
+				background-color: rgba(0,0,0,0.7);
+				color:#ffffff;
+				font-family:Arial,sans-serif;
+				font-size:20px;
+				text-align:center;
+				padding:16px;
+				padding-top:40px;
+				vertical-align: center;
+				font-weight: lighter;
+			}
 		</style>
 
 		<script type="text/javascript" src="http://code.jquery.com/jquery-1.6.2.min.js"></script>
@@ -42,6 +67,9 @@
 			</div>
 			<div id='fullscreen'>
 				<img src='fullscreen.jpg' />
+			</div>
+			<div id='noleap'>
+				<font color='#0090ff'>Leap Motion Device Not detected</font><br/><br/><font size='2'>This demo works with the Leap Motion device.<br/>Connect your device now</font>
 			</div>
 		</div>
 		<script src="./js/tween.min.js"></script>
