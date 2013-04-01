@@ -28,7 +28,7 @@ World.prototype = {
         this.camera                      = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 10000);
         this.scene                       = new THREE.Scene();
 
-        this.scene.fog = new THREE.FogExp2( 0x000000, 0.0001 );
+        this.scene.fog = new THREE.FogExp2( 0x000000, 0.0003 );
             
 		this.camera.position.z = 1000;
 		this.camera.position.y = 250;
@@ -100,7 +100,7 @@ World.prototype = {
 		}
 		
 		var light = new THREE.PointLight(0xFFFFFF, 1);
-		light.position.y = 50;
+		light.position.y = 100;
 		light.position.x = 0;
 		this.scene.add(light);
 	},
@@ -197,7 +197,7 @@ World.prototype = {
 			//Bring vertex back to origin position
 			originAcc = new THREE.Vector3();
 			originAcc.sub(vertex.origin,vertex.position);
-			originAcc.multiplyScalar(0.4);
+			originAcc.multiplyScalar(0.2);
 			velocity.addSelf(originAcc);
 			
 			//Update buffer
@@ -225,6 +225,9 @@ World.prototype = {
 			}
 			that.buffer2[ i ] = ( x1 + x2 + y1 + y2 ) / 2 - that.buffer2[ i ];
 			that.buffer2[ i ] -= that.buffer2[ i ] / 20;
+
+			//that.buffer2[ i ] = ( ( x1 + x2 + y1 + y2 ) / 2 ) - that.buffer2[ i ];
+			//that.buffer1[ i ] += ( that.buffer2[ i ] - that.buffer1[ i ] ) * 0.25;
 			
 			velocity.addSelf(new THREE.Vector3(0,0,(that.buffer1[ i ]-vertex.position.z)*0.05));
 			
